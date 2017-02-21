@@ -75,9 +75,12 @@ class ViewPostHandler(webapp2.RequestHandler):
             self.response.write(error)
         else:
             blog_id = Blog.get_by_id(int(id))
-            self.response.write(blog_id.title)
-            self.response.write("<div>")
-            self.response.write(blog_id.blog_content)
+            t = jinja_env.get_template("viewpost.html")
+            content = t.render(id = blog_id)
+            self.response.write(content)
+            # self.response.write(blog_id.title)
+            # self.response.write("<div>")
+            # self.response.write(blog_id.blog_content)
 
     # def post(self):
     #     blog_id = self.request.get("id")
